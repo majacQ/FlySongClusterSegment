@@ -17,6 +17,9 @@ function options = makeParameterStructure(options)
     %number of clusters in kmeans (default = 12)
     k = 12;
     
+    %true if running human labeling of noise templates (default = false)
+    humanLabel = false;
+    
     %maximum # of peaks to use in clustering & GMM (default = 10000);
     maxNumPeaks = 10000;
         
@@ -47,6 +50,9 @@ function options = makeParameterStructure(options)
     
     %maximum IPI to fit in milliseconds (default = 500)
     maxIPI = 500;
+    
+    %maximum carrier frequency in Hz (default = 1000)
+    maxCarrierFrequency = 1000;
     
     %smoothing sigma for IPI kernel density estimation in milliseconds
     %(default = 1 ms)
@@ -81,6 +87,9 @@ function options = makeParameterStructure(options)
     
     %butterworth high-pass filter cut-off order (default = 6)
     butterworth_order = 6;
+    
+    %Toggle for using likelihood to refine clusterings (default = false)
+    refine_clusters = false;
     
     
     %%%%%%%% t-SNE options %%%%%%%%
@@ -204,6 +213,10 @@ function options = makeParameterStructure(options)
     
     if ~isfield(options,'fs') || isempty(options.fs)
         options.fs = fs;
+    end
+    
+    if ~isfield(options,'humanLabel') || isempty(options.humanLabel)
+        options.humanLabel = humanLabel;
     end
     
     if ~isfield(options,'min_template_size') || isempty(options.min_template_size)
@@ -358,6 +371,15 @@ function options = makeParameterStructure(options)
     if ~isfield(options,'run_tsne') || isempty(options.run_tsne)
         options.run_tsne = run_tsne;
     end
+    
+    if ~isfield(options,'maxCarrierFrequency') || isempty(options.maxCarrierFrequency)
+        options.maxCarrierFrequency = maxCarrierFrequency;
+    end
+    
+    if ~isfield(options,'refine_clusters') || isempty(options.refine_clusters)
+        options.refine_clusters = refine_clusters;
+    end
+    
     
     
     
